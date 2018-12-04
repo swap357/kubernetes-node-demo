@@ -1,16 +1,7 @@
 var http = require('http');
-var router = require('./router');
+http.createServer(function (req, res) {
+    var now = new Date();
+    res.end('Hello from Arya ' + now.toJSON() + ' on ' + process.env.HOSTNAME  + '\n');
 
-router.register('/ping', function(req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.write('Hello from Arya ' + now.toJSON() + ' on ' + process.env.HOSTNAME  + '\n');
-  res.close();
-});
-
-var server = http.createServer(function (req, res) {
-  handler = router.route(req);
-  handler.process(req, res);
-});
-
-server.listen(8000);
+}).listen(8000, '0.0.0.0');
 console.log('Server running at http://:8000/');
